@@ -6,6 +6,9 @@ function computerPlay(){
 
 function playerInput(){
     let playerSelection = prompt("Enter Rock, Paper, Scissors")
+    if(playerSelection === null){
+        return "NONE"
+    }
     return playerSelection.toUpperCase()
 }
 
