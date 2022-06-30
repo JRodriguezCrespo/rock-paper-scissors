@@ -12,7 +12,7 @@ function playerInput(){
     return playerSelection.toUpperCase()
 }
 
-function playRound(player, computer){
+function playRound(player, computer,obj){
     let result
     let resultScore
 
@@ -22,46 +22,54 @@ function playRound(player, computer){
     }else if(player === "ROCK"){
         if(computer === "PAPER"){
             result = "You lose! Paper beats Rock!"
+            gameScore(resultScore = "lose", obj)
             return result
         }else{
+            gameScore(resultScore = "win", obj)
             return "You win! Rock beats Scissors!"
         }
     }else if(player === "PAPER"){
         if(computer === "SCISSORS"){
             result = "You lose! Scissors beats Paper!"
+            gameScore(resultScore = "lose", obj)
             return result
         }else{
+            gameScore(resultScore = "win", obj)
             return "You win! Paper beats Rock!"
         }
     }else if(player === "SCISSORS"){
         if(computer === "ROCK"){
             result = "You lose! Rock beats Scissors!"
+            gameScore(resultScore = "lose", obj)
             return result
         }else{
+            gameScore(resultScore = "win", obj)
             return "You win! Scissors beats Paper!"
         }
     }else return "ERROR! Enter a valid choise: Rock, Paper, Scissors"
 
 }
 
-function gameScore(resultScore){
+function gameScore(resultScore, obj){
     
     if(resultScore === "win"){
-        playerScore =+ 1
+        obj.playerScore++
     }else if(resultScore === "lose"){
-        computerScore =+ 1
+        obj.computerScore++
     }
 }
 
-function game(playerScore, computerScore){
+function game(obj){
     
     for(i = 1; i <= 5; i++){
-       console.log(playRound(playerInput(), computerPlay()))
-
+       console.log(playRound(playerInput(), computerPlay(),obj))
+       console.log(obj)
     }
 }
 
-let playerScore = 0
-let computerScore = 0
+var obj = {
+    playerScore: 0, 
+    computerScore: 0
+};
 
-game(playerScore, computerScore)
+game(obj)
