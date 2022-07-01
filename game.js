@@ -1,9 +1,13 @@
+// This function returns the choice of the computer at random from the
+// selection "ROCK, PAPER, SCISSORS"
 function computerPlay(){
     let computerChoices = ["ROCK", "PAPER", "SCISSORS"]
     let computerChoice = Math.floor(Math.random() * 3)
     return computerChoices[computerChoice]
 }
 
+//This function sends a prompt to the user to enter "ROCK, PAPER, SCISSORS"
+// If the user dosent enter nothing (null) it changes it to a string so the program dosent give an error
 function playerInput(){
     let playerSelection = prompt("Enter Rock, Paper, Scissors")
     if(playerSelection === null){
@@ -12,6 +16,7 @@ function playerInput(){
     return playerSelection.toUpperCase()
 }
 
+//This function contains all the logic for a single round of Rock Paper Scissors
 function playRound(player, computer,obj){
     let result
     let resultScore
@@ -50,6 +55,7 @@ function playRound(player, computer,obj){
 
 }
 
+// This section keeps count of the score of the player and computer
 function gameScore(resultScore, obj){
     
     if(resultScore === "win"){
@@ -59,8 +65,10 @@ function gameScore(resultScore, obj){
     }
 }
 
+// This function loops the rounds until the player or the computer reaches 5 points
+// and then prints who won.
 function game(){
-    
+
     var obj = {
         playerScore: 0, 
         computerScore: 0
