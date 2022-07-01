@@ -59,17 +59,23 @@ function gameScore(resultScore, obj){
     }
 }
 
-function game(obj){
+function game(){
     
-    for(i = 1; i <= 5; i++){
+    var obj = {
+        playerScore: 0, 
+        computerScore: 0
+    };
+    
+    do{
        console.log(playRound(playerInput(), computerPlay(),obj))
        console.log(obj)
+    } while(obj.playerScore < 5 && obj.computerScore < 5)
+
+    if(obj.playerScore === 5){
+        console.log("Congratulations! You Won ")
+    }else{
+        console.log("Too bad. You lost ")
     }
 }
 
-var obj = {
-    playerScore: 0, 
-    computerScore: 0
-};
-
-game(obj)
+game()
