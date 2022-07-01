@@ -1,19 +1,19 @@
 // This function returns the choice of the computer at random from the
 // selection "ROCK, PAPER, SCISSORS"
 function computerPlay(){
-    let computerChoices = ["ROCK", "PAPER", "SCISSORS"]
-    let computerChoice = Math.floor(Math.random() * 3)
-    return computerChoices[computerChoice]
+    let computerChoices = ["ROCK", "PAPER", "SCISSORS"];
+    let computerChoice = Math.floor(Math.random() * 3);
+    return computerChoices[computerChoice];
 }
 
 //This function sends a prompt to the user to enter "ROCK, PAPER, SCISSORS"
 // If the user dosent enter nothing (null) it changes it to a string so the program dosent give an error
 function playerInput(){
-    let playerSelection = prompt("Enter Rock, Paper, Scissors")
+    let playerSelection = prompt("Enter Rock, Paper, Scissors");
     if(playerSelection === null){
-        return "NONE"
+        return "NONE";
     }
-    return playerSelection.toUpperCase()
+    return playerSelection.toUpperCase();
 }
 
 //This function contains all the logic for a single round of Rock Paper Scissors
@@ -22,36 +22,36 @@ function playRound(player, computer,obj){
     let resultScore
 
     if (player === computer ){
-        result = "It's a Tie. Both chose " + player 
-        return result
+        result = "It's a Tie. Both chose " + player;
+        return result;
     }else if(player === "ROCK"){
         if(computer === "PAPER"){
-            result = "You lose! Paper beats Rock!"
+            result = "You lose! Paper beats Rock!";
             gameScore(resultScore = "lose", obj)
-            return result
+            return result;
         }else{
             gameScore(resultScore = "win", obj)
-            return "You win! Rock beats Scissors!"
+            return "You win! Rock beats Scissors!";
         }
     }else if(player === "PAPER"){
         if(computer === "SCISSORS"){
-            result = "You lose! Scissors beats Paper!"
+            result = "You lose! Scissors beats Paper!";
             gameScore(resultScore = "lose", obj)
-            return result
+            return result;
         }else{
             gameScore(resultScore = "win", obj)
-            return "You win! Paper beats Rock!"
+            return "You win! Paper beats Rock!";
         }
     }else if(player === "SCISSORS"){
         if(computer === "ROCK"){
-            result = "You lose! Rock beats Scissors!"
+            result = "You lose! Rock beats Scissors!";
             gameScore(resultScore = "lose", obj)
-            return result
+            return result;
         }else{
             gameScore(resultScore = "win", obj)
-            return "You win! Scissors beats Paper!"
+            return "You win! Scissors beats Paper!";
         }
-    }else return "ERROR! Enter a valid choise: Rock, Paper, Scissors"
+    }else return "ERROR! Enter a valid choise: Rock, Paper, Scissors";
 
 }
 
@@ -59,9 +59,9 @@ function playRound(player, computer,obj){
 function gameScore(resultScore, obj){
     
     if(resultScore === "win"){
-        obj.playerScore++
+        obj.playerScore++;
     }else if(resultScore === "lose"){
-        obj.computerScore++
+        obj.computerScore++;
     }
 }
 
