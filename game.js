@@ -86,8 +86,4 @@ function game(){
     }
 }
 
-game()
-
-
-
-//ddawd
+//game()
