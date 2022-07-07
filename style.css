@@ -17,10 +17,14 @@ header, footer{
 section{
     background-color: green;
     padding: 20px;
-    height: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+section > p{
+    margin: 40px;
+    font-size: 30px;
 }
 
 .game-content{
@@ -52,6 +56,7 @@ p{
 .score > p{
     font-size: 20px;
 }
+
 footer{
     background-color: #512D38;
     font-size: 14px;

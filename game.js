@@ -8,8 +8,8 @@ function computerPlay(){
 
 //This function sends a prompt to the user to enter "ROCK, PAPER, SCISSORS"
 // If the user dosent enter nothing (null) it changes it to a string so the program dosent give an error
-function playerInput(){
-    let playerSelection = prompt("Enter Rock, Paper, Scissors");
+function playerInput(playerSelection){
+    
     if(playerSelection === null){
         return "NONE";
     }
@@ -63,6 +63,26 @@ function gameScore(resultScore, obj){
     }else if(resultScore === "lose"){
         obj.computerScore++;
     }
+    console.log(obj)
+}
+
+function gameOver(obj){
+    if(obj.playerScore === 5){
+        console.log("Congratulations! You Won ")
+    }else if(obj.computerScore ===5){
+        console.log("Too bad. You lost ")
+    }
+}
+
+function onClick(obj){
+    const imgs = document.querySelectorAll('img');
+    imgs.forEach(img => img.addEventListener('click', function(e) {
+    
+        console.log(e.target.alt)
+        console.log(playRound(playerInput(e.target.alt), computerPlay(),obj))
+        gameOver(obj)
+    }));
+
 }
 
 // This function loops the rounds until the player or the computer reaches 5 points
@@ -73,17 +93,10 @@ function game(){
         playerScore: 0, 
         computerScore: 0
     };
-    
-    do{
-       console.log(playRound(playerInput(), computerPlay(),obj))
-       console.log(obj)
-    } while(obj.playerScore < 5 && obj.computerScore < 5)
-
-    if(obj.playerScore === 5){
-        console.log("Congratulations! You Won ")
-    }else{
-        console.log("Too bad. You lost ")
-    }
+    onClick(obj);
 }
 
-//game()
+
+
+
+game();
