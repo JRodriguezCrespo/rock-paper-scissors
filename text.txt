@@ -18,3 +18,12 @@ rock.addEventListener('click', e => {
 },
     {capture: true}
 )
+
+===============
+
+    /*
+    do{
+       console.log(playRound(playerInput(), computerPlay(),obj))
+       console.log(obj)
+    } while(obj.playerScore < 5 && obj.computerScore < 5)
+    */

@@ -23,36 +23,43 @@ function playRound(player, computer,obj){
 
     if (player === computer ){
         result = "It's a Tie. Both chose " + player;
-        return result;
+        displayResult(result);
     }else if(player === "ROCK"){
         if(computer === "PAPER"){
             result = "You lose! Paper beats Rock!";
             gameScore(resultScore = "lose", obj)
-            return result;
+            displayResult(result);
         }else{
             gameScore(resultScore = "win", obj)
-            return "You win! Rock beats Scissors!";
+            result = "You win! Rock beats Scissors!";
+            displayResult(result);
         }
     }else if(player === "PAPER"){
         if(computer === "SCISSORS"){
             result = "You lose! Scissors beats Paper!";
             gameScore(resultScore = "lose", obj)
-            return result;
+            displayResult(result);
         }else{
             gameScore(resultScore = "win", obj)
-            return "You win! Paper beats Rock!";
+            result = "You win! Paper beats Rock!";
+            displayResult(result);
         }
     }else if(player === "SCISSORS"){
         if(computer === "ROCK"){
             result = "You lose! Rock beats Scissors!";
             gameScore(resultScore = "lose", obj)
-            return result;
+            displayResult(result);
         }else{
             gameScore(resultScore = "win", obj)
-            return "You win! Scissors beats Paper!";
+            result =  "You win! Scissors beats Paper!";
+            displayResult(result);
         }
     }else return "ERROR! Enter a valid choise: Rock, Paper, Scissors";
 
+}
+
+function displayResult(result){
+    document.getElementById("result").innerHTML = result;
 }
 
 // This section keeps count of the score of the player and computer
@@ -60,8 +67,10 @@ function gameScore(resultScore, obj){
     
     if(resultScore === "win"){
         obj.playerScore++;
+        document.getElementById("playerScore").innerHTML = obj.playerScore;
     }else if(resultScore === "lose"){
         obj.computerScore++;
+        document.getElementById("computerScore").innerHTML = obj.computerScore;
     }
     console.log(obj)
 }
@@ -94,9 +103,11 @@ function game(){
         computerScore: 0
     };
     onClick(obj);
+
+    window.onload = () => {
+        document.getElementById("playerScore").innerHTML = obj.playerScore;
+        document.getElementById("computerScore").innerHTML = obj.computerScore;
+    }
 }
-
-
-
 
 game();
