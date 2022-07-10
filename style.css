@@ -44,10 +44,18 @@ section > p{
     flex-wrap: wrap;
 }
 
-img{
+.img-box{
     max-width: 150px;
     margin-left: 45px;
     margin-bottom: 15px;
+}
+.img-box:hover{
+    background-color: #7a4253;
+    cursor: pointer;
+}
+
+img{
+    max-width: 150px;
 }
 
 p{
@@ -130,7 +138,6 @@ footer{
     #btn{
         margin-bottom: 50px;
     }
-
 }
 
 @media(max-width: 400px){
