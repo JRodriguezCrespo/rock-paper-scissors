@@ -1,113 +1,114 @@
+var playerScore = 0
+var computerScore = 0
+let roundWinner = ''
+
 // This function returns the choice of the computer at random from the
 // selection "ROCK, PAPER, SCISSORS"
 function computerPlay(){
-    let computerChoices = ["ROCK", "PAPER", "SCISSORS"];
+    let computerChoices = ["Rock", "Paper", "Scissors"];
     let computerChoice = Math.floor(Math.random() * 3);
     return computerChoices[computerChoice];
 }
 
-//This function sends a prompt to the user to enter "ROCK, PAPER, SCISSORS"
-// If the user dosent enter nothing (null) it changes it to a string so the program dosent give an error
-function playerInput(playerSelection){
-    
-    if(playerSelection === null){
-        return "NONE";
-    }
-    return playerSelection.toUpperCase();
-}
-
 //This function contains all the logic for a single round of Rock Paper Scissors
-function playRound(player, computer,obj){
-    let result
-    let resultScore
-
+function playRound(player, computer){
+    
     if (player === computer ){
-        result = "It's a Tie. Both chose " + player;
-        displayResult(result);
-    }else if(player === "ROCK"){
-        if(computer === "PAPER"){
-            result = "You lose! Paper beats Rock!";
-            gameScore(resultScore = "lose", obj)
-            displayResult(result);
-        }else{
-            gameScore(resultScore = "win", obj)
-            result = "You win! Rock beats Scissors!";
-            displayResult(result);
-        }
-    }else if(player === "PAPER"){
-        if(computer === "SCISSORS"){
-            result = "You lose! Scissors beats Paper!";
-            gameScore(resultScore = "lose", obj)
-            displayResult(result);
-        }else{
-            gameScore(resultScore = "win", obj)
-            result = "You win! Paper beats Rock!";
-            displayResult(result);
-        }
-    }else if(player === "SCISSORS"){
-        if(computer === "ROCK"){
-            result = "You lose! Rock beats Scissors!";
-            gameScore(resultScore = "lose", obj)
-            displayResult(result);
-        }else{
-            gameScore(resultScore = "win", obj)
-            result =  "You win! Scissors beats Paper!";
-            displayResult(result);
-        }
-    }else return "ERROR! Enter a valid choise: Rock, Paper, Scissors";
+        roundWinner = "tie"
 
+    }else if(player === "Rock"){
+        if(computer === "Paper"){
+            roundWinner = "lose";
+            computerScore++;
+        }else{
+
+            roundWinner = "win";
+            playerScore++;
+        }
+    }else if(player === "Paper"){
+        if(computer === "Scissors"){
+            roundWinner = "lose";
+            computerScore++;
+        }else{
+
+            roundWinner = "win";
+            playerScore++;
+        }
+    }else if(player === "Scissors"){
+        if(computer === "Rock"){
+            roundWinner = "lose";
+            computerScore++;
+        }else{
+            roundWinner = "win";
+            playerScore++;
+        }
+    }
 }
 
-function displayResult(result){
-    document.getElementById("result").innerHTML = result;
+function displayResult(playerSelection, computerSelection){
+
+    if(roundWinner == 'tie'){
+        document.getElementById("result").innerHTML = `I\'s a Tie. Both chose ${playerSelection}`;
+    }
+    if(roundWinner == 'lose'){
+        document.getElementById("result").innerHTML = `You lost. ${computerSelection} beats ${playerSelection}`;
+    }
+    if(roundWinner == 'win'){
+        document.getElementById("result").innerHTML = `You won. ${playerSelection} beats ${computerSelection}`;
+    }
 }
 
-// This section keeps count of the score of the player and computer
-function gameScore(resultScore, obj){
+function addButton(){
+    const btn = document.querySelector("#btn")
+    btn.classList.remove('hidden')
+}
+
+function updateScore(){
+    document.getElementById("playerScore").innerHTML = playerScore;
+    document.getElementById("computerScore").innerHTML = computerScore;
+}
+
+function gameOver(){
+    if(playerScore === 5 || computerScore === 5){
+        addButton()
+        if(playerScore > computerScore){
+            document.getElementById("result").innerHTML = 'Congratulations, You Win'; 
+        }else{
+            document.getElementById("result").innerHTML = 'Too bad, You lost';
+        }
+    }
+}
+
+function onClick(playerSelection){
+
+    if(playerScore === 5 || computerScore === 5){
+        addButton()
+    }else{
+        const computerSelection = computerPlay()
+        playRound(playerSelection, computerSelection)
+        displayResult(playerSelection, computerSelection)
+        updateScore()
+        gameOver()
+    }
+}
+
+function resetgame(){
+    playerScore = 0
+    computerScore = 0
+    roundWinner = ''
+    updateScore()
+    document.getElementById("result").innerHTML = '';
+    const btn = document.querySelector("#btn")
+    btn.classList.add('hidden')
+}
+
+window.onload = () => {
+    updateScore()
+}
+
+Rock.addEventListener('click', () => onClick("Rock"))
+Paper.addEventListener('click', () => onClick("Paper"))
+Scissors.addEventListener('click', () => onClick("Scissors"))
+btn.addEventListener('click', () => resetgame())
     
-    if(resultScore === "win"){
-        obj.playerScore++;
-        document.getElementById("playerScore").innerHTML = obj.playerScore;
-    }else if(resultScore === "lose"){
-        obj.computerScore++;
-        document.getElementById("computerScore").innerHTML = obj.computerScore;
-    }
-    console.log(obj)
-}
 
-function gameOver(obj){
-    if(obj.playerScore === 5){
-        console.log("Congratulations! You Won ")
-    }else if(obj.computerScore ===5){
-        console.log("Too bad. You lost ")
-    }
-}
-
-function onClick(obj){
-    const imgs = document.querySelectorAll('img');
-    imgs.forEach(img => img.addEventListener('click', function(e) {
-    
-        console.log(e.target.alt)
-        console.log(playRound(playerInput(e.target.alt), computerPlay(),obj))
-        gameOver(obj)
-    }));
-
-}
-
-// This function loops the rounds until the player or the computer reaches 5 points
-// and then prints who won.
-function game(){
-
-    var obj = {
-        playerScore: 0, 
-        computerScore: 0
-    };
-    onClick(obj);
-
-    window.onload = () => {
-        document.getElementById("playerScore").innerHTML = obj.playerScore;
-        document.getElementById("computerScore").innerHTML = obj.computerScore;
-    }
-}
-
-game();
