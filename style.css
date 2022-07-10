@@ -138,6 +138,12 @@ footer{
     #btn{
         margin-bottom: 50px;
     }
+    
+    .img-box{
+        max-width: 150px;
+        margin-left: 0px;
+        margin-bottom: 0px;
+    }
 }
 
 @media(max-width: 400px){
